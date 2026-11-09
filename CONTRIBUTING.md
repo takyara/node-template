@@ -71,5 +71,5 @@ Not sure how to phrase it? Run `npm run commit` for an interactive prompt.
 ## Before opening a pull request
 
 ```bash
-npm run typecheck && npm run lint && npm run format:check && npm run test:coverage && npm run build
+npm run typecheck && npm run lint && npm run format:check && npm run knip && npm run test:coverage && npm run build
 ```

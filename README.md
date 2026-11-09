@@ -11,6 +11,7 @@ A strict **Node.js 26 + TypeScript** starter that follows
 | Language     | TypeScript 6 in strict mode                                          |
 | Code quality | ESLint (strict type-checked rules) + Prettier                        |
 | Tests        | Vitest with V8 coverage (80% minimum)                                |
+| Unused code  | Knip                                                                 |
 | Git hooks    | Husky + lint-staged + commitlint                                     |
 | Releases     | release-please: version bump, `CHANGELOG.md`, tag and GitHub Release |
 | CI           | GitHub Actions: quality checks and pull request title check          |
@@ -41,6 +42,7 @@ npm run dev
 | `npm test`              | Run tests once                                         |
 | `npm run test:watch`    | Run tests on every change                              |
 | `npm run test:coverage` | Run tests with a coverage report                       |
+| `npm run knip`          | Find unused files, exports and dependencies            |
 | `npm run commit`        | Write a conventional commit with an interactive prompt |
 
 ## Project structure
