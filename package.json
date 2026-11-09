@@ -10,7 +10,9 @@
 	},
 	"scripts": {
 		"dev": "node --watch --env-file-if-exists=.env src/index.ts",
-		"start": "node --env-file-if-exists=.env src/index.ts",
+		"clean": "node -e \"for (const d of ['dist','coverage']) fs.rmSync(d,{recursive:true,force:true})\"",
+		"build": "npm run clean && tsc -p tsconfig.build.json",
+		"start": "node --enable-source-maps --env-file-if-exists=.env dist/index.js",
 		"typecheck": "tsc",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
