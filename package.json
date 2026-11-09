@@ -1,30 +1,72 @@
 {
+	"$schema": "https://json.schemastore.org/package.json",
 	"name": "node-template",
 	"version": "0.0.0",
 	"private": true,
 	"description": "Node.js 26 + TypeScript template following Conventional Commits",
-	"license": "MIT",
-	"type": "module",
-	"engines": {
-		"node": ">=26.0.0"
+	"keywords": [],
+	"homepage": "",
+	"bugs": {
+		"url": "",
+		"email": ""
 	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"funding": {
+		"type": "",
+		"url": ""
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Takyara Studio",
+		"email": "",
+		"url": ""
+	},
+	"contributors": [],
+	"maintainers": [],
+	"type": "module",
+	"exports": {
+		".": "./dist/index.js",
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/index.js",
+	"types": "",
+	"imports": {},
+	"bin": {},
+	"man": [],
+	"directories": {},
+	"files": [
+		"dist"
+	],
+	"workspaces": [],
 	"scripts": {
 		"dev": "node --watch --env-file-if-exists=.env src/index.ts",
 		"clean": "node -e \"for (const d of ['dist','coverage']) fs.rmSync(d,{recursive:true,force:true})\"",
 		"build": "npm run clean && tsc -p tsconfig.build.json",
 		"start": "node --enable-source-maps --env-file-if-exists=.env dist/index.js",
 		"typecheck": "tsc",
-		"format": "prettier --write .",
-		"format:check": "prettier --check .",
 		"lint": "eslint . --max-warnings=0",
 		"lint:fix": "eslint . --fix",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"knip": "knip",
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"test:coverage": "vitest run --coverage",
-		"prepare": "husky",
 		"commit": "commit",
-		"knip": "knip"
+		"prepare": "husky"
 	},
+	"config": {},
+	"lint-staged": {
+		"*.{ts,js}": [
+			"eslint --fix --max-warnings=0",
+			"prettier --write"
+		],
+		"*.{json,md,yml,yaml}": "prettier --write"
+	},
+	"dependencies": {},
 	"devDependencies": {
 		"@commitlint/cli": "21.2.4",
 		"@commitlint/config-conventional": "21.2.4",
@@ -43,11 +85,17 @@
 		"typescript-eslint": "8.72.1",
 		"vitest": "5.1.0"
 	},
-	"lint-staged": {
-		"*.{ts,js}": [
-			"eslint --fix --max-warnings=0",
-			"prettier --write"
-		],
-		"*.{json,md,yml,yaml}": "prettier --write"
-	}
+	"peerDependencies": {},
+	"peerDependenciesMeta": {},
+	"optionalDependencies": {},
+	"bundleDependencies": [],
+	"overrides": {},
+	"engines": {
+		"node": ">=26.0.0",
+		"npm": ">=11.0.0"
+	},
+	"os": [],
+	"cpu": [],
+	"packageManager": "npm@11.16.0",
+	"publishConfig": {}
 }
