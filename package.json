@@ -22,7 +22,8 @@
 		"test:watch": "vitest",
 		"test:coverage": "vitest run --coverage",
 		"prepare": "husky",
-		"commit": "commit"
+		"commit": "commit",
+		"knip": "knip"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "21.2.4",
@@ -35,6 +36,7 @@
 		"eslint-config-prettier": "10.1.8",
 		"globals": "17.14.0",
 		"husky": "9.1.7",
+		"knip": "6.44.2",
 		"lint-staged": "17.6.0",
 		"prettier": "3.9.10",
 		"typescript": "6.0.3",
