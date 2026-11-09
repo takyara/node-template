@@ -13,6 +13,10 @@ updates:
       dev-dependencies:
         dependency-type: development
         update-types: [minor, patch]
+    ignore:
+      # typescript-eslint only supports TypeScript < 6.1: upgrade manually once it supports 7
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
 
   # GitHub Actions — commit messages: ci(deps): …
   - package-ecosystem: github-actions
