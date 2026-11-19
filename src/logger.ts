@@ -1,6 +1,6 @@
-import type { LogLevel } from "./env.ts";
-
-const PRIORITY: Record<LogLevel, number> = { debug: 10, info: 20, warn: 30, error: 40 };
+/** Log levels, from the most to the least verbose. */
+export const LOG_LEVELS = ["debug", "info", "warn", "error"] as const;
+export type LogLevel = (typeof LOG_LEVELS)[number];
 
 type LogFn = (msg: string, meta?: Record<string, unknown>) => void;
 export type Logger = Record<LogLevel, LogFn>;
@@ -44,7 +44,7 @@ export function createLogger({
 	const log =
 		(lvl: LogLevel): LogFn =>
 		(msg, meta = {}) => {
-			if (PRIORITY[lvl] < PRIORITY[level]) return;
+			if (LOG_LEVELS.indexOf(lvl) < LOG_LEVELS.indexOf(level)) return;
 			write(serialize({ ...meta, time: new Date().toISOString(), level: lvl, msg }));
 		};
 

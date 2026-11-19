@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import type { LogLevel } from "./env.ts";
-import { createLogger } from "./logger.ts";
+import { type LogLevel, createLogger } from "./logger.ts";
 
 function setup(level: LogLevel) {
 	const lines: string[] = [];
