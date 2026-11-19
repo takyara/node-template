@@ -1,8 +1,8 @@
+import { LOG_LEVELS, type LogLevel } from "./logger.ts";
+
 const NODE_ENVS = ["development", "test", "production"] as const;
-const LOG_LEVELS = ["debug", "info", "warn", "error"] as const;
 
 type NodeEnv = (typeof NODE_ENVS)[number];
-export type LogLevel = (typeof LOG_LEVELS)[number];
 
 export interface Env {
 	readonly nodeEnv: NodeEnv;
