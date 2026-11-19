@@ -27,19 +27,11 @@
 	"contributors": [],
 	"maintainers": [],
 	"type": "module",
-	"exports": {
-		".": "./dist/index.js",
-		"./package.json": "./package.json"
-	},
-	"main": "./dist/index.js",
 	"types": "",
 	"imports": {},
 	"bin": {},
 	"man": [],
 	"directories": {},
-	"files": [
-		"dist"
-	],
 	"workspaces": [],
 	"scripts": {
 		"dev": "node --watch --env-file-if-exists=.env src/index.ts",
