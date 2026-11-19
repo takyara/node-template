@@ -30,6 +30,14 @@ describe("createLogger", () => {
 		expect(entries().map((e) => e["msg"])).toEqual(["c", "d"]);
 	});
 
+	it("does not let metadata override reserved fields", () => {
+		const { logger, entries } = setup("debug");
+		logger.info("real", { time: "fake", level: "error", msg: "fake" });
+
+		expect(entries()[0]).toMatchObject({ level: "info", msg: "real" });
+		expect(entries()[0]?.["time"]).not.toBe("fake");
+	});
+
 	it("writes to stdout by default", () => {
 		const spy = vi.spyOn(process.stdout, "write").mockReturnValue(true);
 		createLogger({ level: "info" }).info("hello");

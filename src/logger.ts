@@ -23,7 +23,7 @@ export function createLogger({
 		(lvl: LogLevel): LogFn =>
 		(msg, meta = {}) => {
 			if (PRIORITY[lvl] < PRIORITY[level]) return;
-			write(JSON.stringify({ time: new Date().toISOString(), level: lvl, msg, ...meta }));
+			write(JSON.stringify({ ...meta, time: new Date().toISOString(), level: lvl, msg }));
 		};
 
 	return { debug: log("debug"), info: log("info"), warn: log("warn"), error: log("error") };
