@@ -4,43 +4,23 @@
 	"version": "0.1.0",
 	"private": true,
 	"description": "Node.js 26 + TypeScript template following Conventional Commits",
-	"keywords": [],
-	"homepage": "",
-	"bugs": {
-		"url": "",
-		"email": ""
-	},
 	"repository": {
 		"type": "git",
 		"url": ""
 	},
-	"funding": {
-		"type": "",
-		"url": ""
-	},
 	"license": "MIT",
 	"author": {
-		"name": "Takyara Studio",
-		"email": "",
-		"url": ""
+		"name": "Takyara Studio"
 	},
-	"contributors": [],
-	"maintainers": [],
 	"type": "module",
 	"exports": {
 		".": "./dist/index.js",
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/index.js",
-	"types": "",
-	"imports": {},
-	"bin": {},
-	"man": [],
-	"directories": {},
 	"files": [
 		"dist"
 	],
-	"workspaces": [],
 	"scripts": {
 		"dev": "node --watch --env-file-if-exists=.env src/index.ts",
 		"clean": "node -e \"for (const d of ['dist','coverage']) fs.rmSync(d,{recursive:true,force:true})\"",
@@ -58,7 +38,6 @@
 		"commit": "commit",
 		"prepare": "husky"
 	},
-	"config": {},
 	"lint-staged": {
 		"*.{ts,js}": [
 			"eslint --fix --max-warnings=0",
@@ -66,7 +45,6 @@
 		],
 		"*.{json,md,yml,yaml}": "prettier --write"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"@commitlint/cli": "21.2.4",
 		"@commitlint/config-conventional": "21.2.4",
@@ -85,17 +63,9 @@
 		"typescript-eslint": "8.72.1",
 		"vitest": "5.1.0"
 	},
-	"peerDependencies": {},
-	"peerDependenciesMeta": {},
-	"optionalDependencies": {},
-	"bundleDependencies": [],
-	"overrides": {},
 	"engines": {
 		"node": ">=26.0.0",
 		"npm": ">=11.0.0"
 	},
-	"os": [],
-	"cpu": [],
-	"packageManager": "npm@11.16.0",
-	"publishConfig": {}
+	"packageManager": "npm@11.16.0"
 }
