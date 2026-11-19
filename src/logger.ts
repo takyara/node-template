@@ -12,6 +12,14 @@ export interface LoggerOptions {
 	readonly write?: (line: string) => void;
 }
 
+/** Errors have no enumerable fields: without this they would be logged as `{}`. */
+function replacer(_key: string, value: unknown): unknown {
+	if (value instanceof Error) {
+		return { name: value.name, message: value.message, stack: value.stack, cause: value.cause };
+	}
+	return value;
+}
+
 /**
  * Minimal dependency-free JSON logger: one JSON object per line.
  */
@@ -23,7 +31,7 @@ export function createLogger({
 		(lvl: LogLevel): LogFn =>
 		(msg, meta = {}) => {
 			if (PRIORITY[lvl] < PRIORITY[level]) return;
-			write(JSON.stringify({ ...meta, time: new Date().toISOString(), level: lvl, msg }));
+			write(JSON.stringify({ ...meta, time: new Date().toISOString(), level: lvl, msg }, replacer));
 		};
 
 	return { debug: log("debug"), info: log("info"), warn: log("warn"), error: log("error") };

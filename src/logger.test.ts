@@ -38,6 +38,18 @@ describe("createLogger", () => {
 		expect(entries()[0]?.["time"]).not.toBe("fake");
 	});
 
+	it("serializes errors with their message, stack and cause", () => {
+		const { logger, entries } = setup("debug");
+		logger.error("failed", { err: new TypeError("boom", { cause: new Error("root") }) });
+
+		expect(entries()[0]?.["err"]).toMatchObject({
+			name: "TypeError",
+			message: "boom",
+			stack: expect.stringContaining("boom") as unknown,
+			cause: { name: "Error", message: "root" },
+		});
+	});
+
 	it("writes to stdout by default", () => {
 		const spy = vi.spyOn(process.stdout, "write").mockReturnValue(true);
 		createLogger({ level: "info" }).info("hello");
