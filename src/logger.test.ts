@@ -50,6 +50,25 @@ describe("createLogger", () => {
 		});
 	});
 
+	it("serializes bigints as strings", () => {
+		const { logger, entries } = setup("debug");
+		logger.info("big", { n: 10n ** 20n });
+
+		expect(entries()[0]?.["n"]).toBe("100000000000000000000");
+	});
+
+	it("does not throw on circular metadata", () => {
+		const { logger, entries } = setup("debug");
+		const circular: Record<string, unknown> = {};
+		circular["self"] = circular;
+
+		expect(() => {
+			logger.info("loop", { circular });
+		}).not.toThrow();
+		expect(entries()[0]).toMatchObject({ level: "info", msg: "loop" });
+		expect(entries()[0]?.["logError"]).toEqual(expect.stringContaining("circular"));
+	});
+
 	it("writes to stdout by default", () => {
 		const spy = vi.spyOn(process.stdout, "write").mockReturnValue(true);
 		createLogger({ level: "info" }).info("hello");
