@@ -12,12 +12,26 @@ export interface LoggerOptions {
 	readonly write?: (line: string) => void;
 }
 
-/** Errors have no enumerable fields: without this they would be logged as `{}`. */
+/**
+ * Errors have no enumerable fields: without this they would be logged as `{}`.
+ * BigInts are not supported by JSON: without this `JSON.stringify` would throw.
+ */
 function replacer(_key: string, value: unknown): unknown {
 	if (value instanceof Error) {
 		return { name: value.name, message: value.message, stack: value.stack, cause: value.cause };
 	}
+	if (typeof value === "bigint") return value.toString();
 	return value;
+}
+
+/** Logging must never crash the app: unserializable metadata (e.g. circular) is dropped. */
+function serialize(entry: Record<string, unknown>): string {
+	try {
+		return JSON.stringify(entry, replacer);
+	} catch (error) {
+		const { time, level, msg } = entry;
+		return JSON.stringify({ time, level, msg, logError: String(error) });
+	}
 }
 
 /**
@@ -31,7 +45,7 @@ export function createLogger({
 		(lvl: LogLevel): LogFn =>
 		(msg, meta = {}) => {
 			if (PRIORITY[lvl] < PRIORITY[level]) return;
-			write(JSON.stringify({ ...meta, time: new Date().toISOString(), level: lvl, msg }, replacer));
+			write(serialize({ ...meta, time: new Date().toISOString(), level: lvl, msg }));
 		};
 
 	return { debug: log("debug"), info: log("info"), warn: log("warn"), error: log("error") };
